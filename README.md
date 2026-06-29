@@ -1,4 +1,4 @@
-#Detecting Suspicious Network Traffic using Suricata
+# Detecting Suspicious Network Traffic using Suricata
 
 ## 📋 Overview
 
