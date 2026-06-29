@@ -99,7 +99,7 @@ Update the interface in **two places**:
 sudo nano /etc/sysconfig/suricata
 ```
 ```
-OPTIONS="-i ens160"
+OPTIONS="-i ens15" ---> your interface 
 ```
 
 ### 4. Enable EVE JSON logging
@@ -179,7 +179,7 @@ sudo tail -f /var/log/suricata/eve.json | grep --line-buffered '"event_type":"al
 ```
 Sample alert captured:
 ```json
-{"event_type":"alert","src_ip":"192.168.1.17","dest_ip":"192.168.1.4","dest_port":21,"proto":"TCP",
+{"event_type":"alert","src_ip":"Attacker ip","dest_ip":"victim ip","dest_port":21,"proto":"TCP",
 "alert":{"signature_id":1000001,"signature":"LOCAL SCAN Possible Nmap SYN Scan Detected","severity":2}}
 ```
 
@@ -208,16 +208,6 @@ LOCAL SCAN Possible Nmap SYN Scan Detected
 | `No rule files match the pattern /var/lib/suricata/rules/local.rules` | Rule file created in `/etc/suricata/rules/` instead of the actual `default-rule-path` | Create `local.rules` in the exact path defined by `default-rule-path` |
 
 > 💡 **Key lesson learned:** A YAML file referencing a rule filename is not enough — Suricata resolves that filename relative to `default-rule-path`. Always verify the actual resolved path, not just the filename in `rule-files`.
-
----
-
-## 📸 Screenshots
-
-> *(Add your screenshots in a `screenshots/` folder and reference them below)*
-
-- `screenshots/01-suricata-service-running.png` – `systemctl status suricata` showing active service
-- `screenshots/02-eve-json-alert.png` – Raw alert captured in `eve.json`
-- `screenshots/03-wazuh-alert-dashboard.png` – Alert visualized in Wazuh Dashboard
 
 ---
 
